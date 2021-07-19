@@ -28,6 +28,7 @@ const SHOP = () => {
                 {
                     products.map(pd=>
                          <PRODUCT
+                         showAddToCart = {true}
                          handleAddProduct = { handleAddProduct}
                          product={pd}>
 
