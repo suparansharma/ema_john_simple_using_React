@@ -24,7 +24,7 @@ const SHOP = () => {
    
    // constuseState()
     return (
-        <div className= "Shop-Container">
+        <div className= "twin-Container">
             <div className="Product-Container">
 
             
