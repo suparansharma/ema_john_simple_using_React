@@ -4,6 +4,7 @@ import { addToDatabaseCart,getDatabaseCart } from '../../utilities/databaseManag
 import CART from '../CART/CART';
 import PRODUCT from '../PRODUCT/PRODUCT';
 import './SHOP.css'
+import { Link } from 'react-router-dom';
 
 const SHOP = () => {
     
@@ -73,7 +74,14 @@ const SHOP = () => {
 
             </div>
             <div className="Card-Container">
-            <CART cart={cart}></CART>
+            <CART cart={cart}>
+               <Link to="/review">
+            <button className="main-button">
+                Rivew
+            </button>
+            
+            </Link>
+            </CART>
             </div>
             
             
