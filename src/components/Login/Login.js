@@ -3,6 +3,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from './firebase.config';
 import  {UserContext} from '../../App';
+import { useLocation,useHistory } from 'react-router-dom';
 
 
 firebase.initializeApp(firebaseConfig);
@@ -19,6 +20,9 @@ function Login() {
 
   })
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+  const history = useHistory();
+  const location = useLocation();
+  let { from } = location.state || { from: { pathname: "/" } };
   const handleSignIn = () =>{
 
     firebase.auth().signInWithPopup(provider)
@@ -94,6 +98,7 @@ function Login() {
         newUserInfo.success=true;
         setUser(newUserInfo);
         setLoggedInUser(newUserInfo);
+        history.replace(from);
         updateUserName(user.name);
         
       })
