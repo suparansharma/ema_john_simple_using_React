@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from './firebase.config';
+import  {UserContext} from '../../App';
+
 
 firebase.initializeApp(firebaseConfig);
 function Login() {
@@ -16,6 +18,7 @@ function Login() {
     // error : ''
 
   })
+  const [loggedInUser, setLoggedInUser] = useContext(UserContext);
   const handleSignIn = () =>{
 
     firebase.auth().signInWithPopup(provider)
@@ -90,6 +93,7 @@ function Login() {
         newUserInfo.error = '';
         newUserInfo.success=true;
         setUser(newUserInfo);
+        setLoggedInUser(newUserInfo);
         updateUserName(user.name);
         
       })
@@ -140,6 +144,8 @@ e.preventDefault();
 
   }
   return (
+    
+
     <div style={{textAlign:'center'}}>
 
       {

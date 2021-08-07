@@ -14,13 +14,20 @@ import Nomatch from './components/Nomatch/Nomatch';
 import Productdetails from './components/Productdetails/Productdetails';
 import Login from './components/Login/Login';
 import Shipment from './components/Shipment/Shipment';
+import { createContext, useState } from 'react';
+
+export const UserContext = createContext();
 
 
 
 
 function App() {
+
+  const [loggedInUser,setLoggedInUser] = useState({});
+
   return (
-    <div>
+    <UserContext.Provider value= {[loggedInUser,setLoggedInUser]}>
+      <h3>Email : {loggedInUser.email}</h3>
       <Header></Header>
       <Router>
         <Switch>
@@ -60,7 +67,7 @@ function App() {
       </Router>
     
    
-    </div>
+    </UserContext.Provider>
   );
 }
 
