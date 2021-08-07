@@ -12,6 +12,10 @@ import Review from './components/Review/Review';
 import Inventory from './components/Inventory/Inventory';
 import Nomatch from './components/Nomatch/Nomatch';
 import Productdetails from './components/Productdetails/Productdetails';
+import Login from './components/Login/Login';
+import Shipment from './components/Shipment/Shipment';
+
+
 
 
 function App() {
@@ -22,6 +26,12 @@ function App() {
         <Switch>
         <Route path="/shop">
         <SHOP></SHOP>
+        </Route>
+        <Route path="/login">
+        <Login></Login>
+        </Route>
+        <Route path="/shipment">
+       <Shipment></Shipment>
         </Route>
         <Route path="/review">
         <Review></Review>
@@ -38,6 +48,14 @@ function App() {
         <Route path="*">
         <Nomatch></Nomatch>
         </Route>
+
+        <Route path="/login">
+        <Login></Login>
+        </Route>
+
+
+       
+
         </Switch>
       </Router>
     
