@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 
 import  {UserContext} from '../../App';
 import { useLocation,useHistory } from 'react-router-dom';
-import { handleGoogleSignIn, handleSignOut, initializeLoginFramework } from './loginManager';
+import { createUserWithEmailAndPassword, handleGoogleSignIn, handleSignOut, initializeLoginFramework, signInWithEmailAndPassword } from './loginManager';
 
 
 
@@ -28,21 +28,24 @@ function Login() {
       handleGoogleSignIn()
       .then(res => {
 
-          setUser(res);
-          setLoggedInUser(res);
-          history.replace(from);
+       
         })
   }
 
 const signOut = () =>{
     handleSignOut()
     .then(res =>{
-        setUser(res);
-        setLoggedInUser(res);
+        handleResponse(res,false);
     })
 }
  
-
+const handleResponse = (res,redirect) =>{
+    setUser(res);
+    setLoggedInUser(res);
+    if(redirect){
+        history.replace(from);
+    }
+}
   const handleBlur = (e)=>{
     let isFormValid = true;
     if(e.target.name === 'email'){
@@ -67,12 +70,19 @@ const signOut = () =>{
   const handleSubmit = (e)=>{
     // console.log(user.email,user.password);
     if(newUser && user.email && user.password){
-  
+        createUserWithEmailAndPassword(user.name,user.email,user.password)
+        .then(res => {
+            handleResponse(res,true);
+        })
+       
     }
 
 
     if(!newUser && user.email && user.password){
-
+        signInWithEmailAndPassword(user.email,user.password)
+        .then(res => {
+            handleResponse(res,true);
+        })
     }
 e.preventDefault();
   }
